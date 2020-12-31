@@ -34,6 +34,6 @@ while counter >= 0:
         time.sleep(.5)
         counter = counter - 1 
 
-print("*** THE END ***\n")
+print("*** THE END ***")
 
 
