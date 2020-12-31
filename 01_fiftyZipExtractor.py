@@ -14,7 +14,7 @@ import time
 
 
 counter = 50 #Because given filenanme is 50.zip
-str_pwd= 'pass' #Password to extract the ZIP files, 
+str_pwd= 'pass' #Password to extract the ZIP files
 filename = ""
 
 print("*** 50 ZIP ( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°) Extractor***\n")
@@ -34,6 +34,6 @@ while counter >= 0:
         time.sleep(.5)
         counter = counter - 1 
 
-print("*** THE END r***\n")
+print("*** THE END ***\n")
 
 
