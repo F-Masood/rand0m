@@ -8,7 +8,8 @@
 > 1. Portknocking sequence revelaed (8721, 45000, 9191)
 > 1. Enumerate the webserver (port 65,000)
 > 1. Try running gobuster against it
-> 1. Any useful directory found ??? (projects) 
+> 1. Any useful directory found ??? (yes, found -> projects)
+> 1. /projects/index.php (Upload Media Center)
 > 1. What about arbitary file upload vulnerability for getting RCE / Rev Shell? (uploaded_files)
 > 1. Exploit passwordstrength binary and then overspill binary 
 > 1. Become root 
