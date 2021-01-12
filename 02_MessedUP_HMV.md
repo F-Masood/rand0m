@@ -11,7 +11,7 @@
 > 1. Any useful directory found ??? (yes, found -> projects)
 > 1. /projects/index.php (Upload Media Center)
 > 1. What about arbitary file upload vulnerability for getting RCE / Rev Shell? (uploaded_files)
-> 1. Exploit passwordstrength binary and then overspill binary 
+> 1. Exploit passwordstrength binary (location: /usr/bin/passwordStrengthApp.exe) and then overspill binary (/home/skinny/.reload)
 > 1. Become root 
 
 **Name: passwordstrength app**\
