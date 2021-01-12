@@ -2,14 +2,14 @@
 
 **Solution** for the **MessedUP** linux box -  **HackMyVM** site ~ Made and tested in VMWare Workstation
 > 1. Avoid rabbit holes
-> 1. Connect to FTP as anon user and download/read the file
+> 1. Connect to FTP (port 8080) as anon user and download/read the file
 > 1. Connect to tftp and download 125.zip file
 > 1. Extract it
-> 1. Portknocking sequence revelaed
-> 1. Enumerate the webserver port
+> 1. Portknocking sequence revelaed (8721, 45000, 9191)
+> 1. Enumerate the webserver (port 65,000)
 > 1. Try running gobuster against it
-> 1. Any useful directory found ??? 
-> 1. What about arbitary file upload vulnerability for getting RCE / Rev Shell? 
+> 1. Any useful directory found ??? (projects) 
+> 1. What about arbitary file upload vulnerability for getting RCE / Rev Shell? (uploaded_files)
 > 1. Exploit passwordstrength binary and then overspill binary 
 > 1. Become root 
 
