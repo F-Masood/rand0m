@@ -9,7 +9,7 @@
 > 1. Enumerate the webserver port
 > 1. Try running gobuster against it
 > 1. Any useful directory found ??? 
-> 1. What about arbitary file upload vulnerability for getting RCE / Rev Shell. 
+> 1. What about arbitary file upload vulnerability for getting RCE / Rev Shell? 
 > 1. Exploit passwordstrength binary and then overspill binary 
 > 1. Become root 
 
