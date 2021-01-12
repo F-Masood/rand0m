@@ -173,3 +173,17 @@ while loop <= 125:
 
     loop=loop+1
 ```
+
+**Name: ZIPextractor.py**
+```python
+import os;
+import time;
+loop = 125
+
+while loop >= 0:
+    time.sleep(0.1)
+    filename=str(loop)+'.zip'
+    os.system("unzip "+filename)
+    os.system("rm "+filename)
+    loop = loop -1
+```
