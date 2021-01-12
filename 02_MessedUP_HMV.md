@@ -4,7 +4,7 @@
 > 1. Avoid rabbit holes
 > 1. Connect to FTP (port 8080) as anon user and download/read the file
 > 1. Connect to tftp and download 125.zip file
-> 1. Extract it
+> 1. Extract it (script below)
 > 1. Portknocking sequence revelaed (8721, 45000, 9191)
 > 1. Enumerate the webserver (port 65,000)
 > 1. Try running gobuster against it
