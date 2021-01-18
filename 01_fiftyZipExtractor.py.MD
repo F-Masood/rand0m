@@ -5,7 +5,7 @@ Wesbite: https://grimmcon.ctf.games/challenges \
 Made in: Python3\
 OS: KaliLinux 2020.1
 
-> 1. To run this script type: python3 <this script name>
+> 1. To run this script type: python3 *<this script name>*
 > 1. e.g:  python3 fiftyZipExtractor.py
 > 1. Note: Make sure this python script and 50.zip file are in the same directory
 
