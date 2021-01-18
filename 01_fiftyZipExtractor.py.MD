@@ -1,8 +1,8 @@
 ##### Author: skinny3l3phant
-Date: 31 Dec 2020
-Challenge name: ZIP ZIP - 50 points
-Wesbite: https://grimmcon.ctf.games/challenges
-Made in: Python3
+Date: 31 Dec 2020\
+Challenge name: ZIP ZIP - 50 points\
+Wesbite: https://grimmcon.ctf.games/challenges \
+Made in: Python3\
 OS: KaliLinux 2020.1
 
 > 1. To run this script type: python3 <this script name>
