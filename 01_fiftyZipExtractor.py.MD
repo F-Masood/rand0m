@@ -8,7 +8,7 @@
 #To run this script type: python3 <this script name>
 #                   e.g:  python3 fiftyZipExtractor.py
 #                   Note: Make sure this python script and 50.zip file are in the same directory
-
+```python
 from zipfile import ZipFile
 import time
 
@@ -35,5 +35,5 @@ while counter >= 0:
         counter = counter - 1 
 
 print("*** THE END ***")
-
+```
 
