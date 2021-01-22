@@ -20,7 +20,7 @@
 > 1. From Kali Box simply connect to that port with nc. eg. nc <ip> <port told by the game>
 > 1. you are now root, read the root flag. 
   
-## #Sourcecode of binary mysimplemathsgame
+## Sourcecode of binary mysimplemathsgame
   
 ```python
 #Date: 14 Jan 2021
