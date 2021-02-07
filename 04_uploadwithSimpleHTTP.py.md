@@ -6,6 +6,8 @@ This module builds on BaseHTTPServer by implementing the standard GET
 and HEAD requests in a fairly straightforward manner.
 """
 #Copied from: https://gist.github.com/UniIsland/3346170
+#To run type this from CMD: python <this file name.py> <port number>
+#e.g: python uploadwithSimpleHTTP.py 80
 
 __version__ = "0.1"
 __all__ = ["SimpleHTTPRequestHandler"]
