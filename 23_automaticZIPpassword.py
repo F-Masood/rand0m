@@ -13,7 +13,7 @@ length = 11  #length of password
 lower = string.ascii_lowercase
 upper = string.ascii_uppercase
 num = string.digits
-symbols = '@$%-=+_'
+symbols = '=+_-'
 
 #symbols = string.punctuation
 #print (type(symbols))
@@ -28,7 +28,7 @@ password = "".join(temp) #here is final password
 timeIs = datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p")
 fileName = 'mySecure_'+str(timeIs)+'.zip'
 
-os.system('zip -r -P '+str(password)+' /dev/shm/mySecure'+str(timeIs)+'.zip /home/fm/')
+os.system('zip -r -P '+str(password)+' /dev/shm/mySecure_'+str(timeIs)+'.zip /home/fm/')
 
 #just some logging for trobule shooting
 f = open("/dev/shm/cronLog", "a")
