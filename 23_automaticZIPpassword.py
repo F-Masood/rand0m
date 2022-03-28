@@ -1,6 +1,8 @@
 '''
 This python script will password protect "/home/fm" directory with a random password.
 Password protected ZIP folder will be placed in /dev/shm/ directory
+Make it a every 2 minute cronjob by adding following:
+*/2 * * * *  python3 /root/mybackup.py
 '''
 
 import string, random, os
