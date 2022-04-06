@@ -10,5 +10,14 @@
 4. E.g `shell dir` or `shell whoami`
 
 ### .hta file execution (requres Internet Explorer)
-`<html> <head> <title>Hello World </title> </head> <body> <h2>Hello World</h2> <p>This is an HTA...</p> </body> </html>`
-
+```
+<html>
+  <head>
+    <title>Hello World</title>
+  </head>
+  <body>
+    <h2>Hello World</h2>
+    <p>This is an HTA...</p>
+  </body>
+</html>
+```
