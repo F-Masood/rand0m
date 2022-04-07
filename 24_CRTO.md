@@ -91,3 +91,8 @@
 </html>
 
 ```
+
+### .macro for MS Word
+1. Generate a macro for MS WORD **Attacks -> Packages -> MS Office Macro**
+2. Copy & Paste the macro in the MS Word document (remeber to use **.doc** not the **.docx**
+3. Disable Defender and Run it, you'll get the beacon 
