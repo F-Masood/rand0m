@@ -145,6 +145,12 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 3. Take periodic screenshots of desktop ---> `screenwatch`
 4. Go to **View** and click **Screenshots** to view the SS.
 
+#### via keyloggers
+1. `keylogger`
+2. From **view** ---> **keystrokes**
+3. `jobs`
+
+
 ### Windows Privilege Escalation - UAC Bypass
 1. First run the SharpUp.exe via command `execute-assembly /opt/CRTO/SharpUp.exe audit`
 2. If you see some error like **In medium integrity but user is a local administrator - UAC can be bypassed.** Then this attack **may** be successful. 
