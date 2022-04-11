@@ -143,4 +143,5 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 
 ### Some good points
 1. While doing active reconnisane, use VPN to hide the real Public IP address. 
-2. Emotional characteristics that usually result in higher user engagment are **fear, urgency, greed and curiosity**.
+2. The **pretext** is the **"story"** behind why we want our target to open our email and carry out the desired actions.
+3. Emotional characteristics that usually result in higher user engagment are **fear, urgency, greed and curiosity**.
