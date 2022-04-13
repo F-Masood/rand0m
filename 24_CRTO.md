@@ -163,6 +163,8 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 5. `connect localhost 4444`.
 6. for smb type `ls \\.\pipe`.
 7. next type `link locahost`.
+8. **link** command is for **SMB** and **connect** is for **TCP**. 
+
 #### method -> unquoted services path
 1. `beacon> run wmic service get name, pathname`.
 2. `powershell Get-Acl -Path "C:\Program Files\Vuln Services" | fl`.
