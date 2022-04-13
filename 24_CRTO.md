@@ -276,6 +276,10 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 6. SharpHound will target the current domain. To enumerate a foreign domain, use the -d option - > `beacon> execute-assembly C:\Tools\SharpHound3\SharpHound3\bin\Debug\SharpHound.exe -c DcOnly -d cyberbotic.io`
 7. Download the generated **.zip** files
 8. Upload it to the **bloodhound** 
+
+### Lateral Movement
+1. CS provides 03 strategies for executing Beacons/code/commands on remote targets i.e. **jump** **remote-exec** **powershell, execute-assembly***
+
 ### Miscellaneous good points
 1. While doing active reconnisane, use VPN to hide the real Public IP address. 
 2. The **pretext** is the **"story"** behind why we want our target to open our email and carry out the desired actions.
