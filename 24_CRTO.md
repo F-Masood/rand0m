@@ -230,9 +230,52 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 
 ### Domain Reconnaissance
 #### Powerview
-1> `beacon> powershell-import C:\Tools\PowerSploit\Recon\PowerView.ps1`
+1. `beacon> powershell-import C:\Tools\PowerSploit\Recon\PowerView.ps1`
 #### Get-Domain
-1> `beacon> powershell Get-Domain`
+1. `beacon> powershell Get-Domain`
+#### Get-DomainController
+1. `beacon> powershell Get-DomainController | select Forest, Name, OSVersion | fl`
+#### Get-ForestDomain
+1. `beacon> powershell Get-ForestDomain`
+#### Get-DomainPolicyData
+1. `beacon> powershell Get-DomainPolicyData | select -ExpandProperty SystemAccess`
+#### Get-DomainUser
+1. `beacon> powershell Get-DomainUser -Identity nlamb -Properties DisplayName, MemberOf | fl`
+#### Get-DomainComputer
+1. `beacon> powershell Get-DomainComputer -Properties DnsHostName | sort -Property DnsHostName`
+#### Get-DomainOU
+1. `beacon> powershell Get-DomainOU -Properties Name | sort -Property Name`
+#### Get-DomainGroup
+1. `beacon> powershell Get-DomainGroup | where Name -like "*Admins*" | select SamAccountName`
+#### Get-DomainGroupMember
+1. `beacon> powershell Get-DomainGroupMember -Identity "Domain Admins" | select MemberDistinguishedName`
+#### Get-DomainGPO
+1. `beacon> powershell Get-DomainGPO -Properties DisplayName | sort -Property DisplayName`
+2. `beacon> powershell Get-DomainGPO -ComputerIdentity wkstn-1 -Properties DisplayName | sort -Property DisplayName`
+#### Get-DomainGPOLocalGroup
+1. `beacon> powershell Get-DomainGPOLocalGroup | select GPODisplayName, GroupName`
+#### Get-DomainGPOUserLocalGroupMapping
+1. `beacon> powershell Get-DomainGPOUserLocalGroupMapping -LocalGroup Administrators | select ObjectName, GPODisplayName, ContainerName, ComputerName`
+#### Find-DomainUserLocation
+1. `beacon> powershell Find-DomainUserLocation | select UserName, SessionFromName`
+#### Get-NetSession
+1. `beacon> powershell Get-NetSession -ComputerName dc-2 | select CName, UserName`
+#### Get-DomainTrust
+1. `beacon> powershell Get-DomainTrust`
+#### Sharpview
+1. SharpView was designed to be a .NET port of PowerView and therefore has much the same functionality.
+1. `beacon> execute-assembly C:\Tools\SharpView\SharpView\bin\Debug\SharpView.exe Get-Domain`
+#### ADSearch
+1. Finding all domain groups that end in "Admins" -->  `beacon> execute-assembly C:\Tools\ADSearch\ADSearch\bin\Debug\ADSearch.exe --search "(&(objectCategory=group)(cn=*Admins))"`
+#### BloodHound
+1. Go to **C:\Tools\neo4j\bin** and run **neo4j.bat console**
+2. Open web browser and go to **http://localhost:7474/**. Username & Password both are **neo4j**. Set a new password and close the web browser
+3. Go to **C:\Tools\BloodHound** and launch **BloodHound.exe** with new password
+4. Collect data via the help of **Sharphound**
+5. `beacon> execute-assembly C:\Tools\SharpHound3\SharpHound3\bin\Debug\SharpHound.exe -c DcOnly`
+6. SharpHound will target the current domain. To enumerate a foreign domain, use the -d option - > `beacon> execute-assembly C:\Tools\SharpHound3\SharpHound3\bin\Debug\SharpHound.exe -c DcOnly -d cyberbotic.io`
+7. Download the generated **.zip** files
+8. Upload it to the **bloodhound** 
 ### Miscellaneous good points
 1. While doing active reconnisane, use VPN to hide the real Public IP address. 
 2. The **pretext** is the **"story"** behind why we want our target to open our email and carry out the desired actions.
