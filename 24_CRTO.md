@@ -4,6 +4,15 @@
 2. First start team server `./teamserver 192.168.10.200 password123 havex.profile`
 3. Then `./start.sh`
 
+#### How to start cobalt strike 4.7 ?
+1. First start team server `./teamserver <KALI IP> <some password> <some C2 malleable profile>`
+2. First start team server `./teamserver 192.168.1.65 Password123`
+3. Then to start the client `./cobaltstrike`
+
+#### How to start listeners ?
+1. Different types of listeners e.g. HTTP, DNS, SMB, TCP etc.
+2. To find **Pipes** type the following command in **Powershell** `ls \\.\pipe\`.
+
 #### Useful commands for CS 4.3?
 1. Change beacon time `sleep <digit number>`
 2. E.g Change beacon time to 02 seconds `sleep 2`
