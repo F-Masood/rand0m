@@ -1,4 +1,7 @@
 ## Or use psudohash to generate wordlist -> https://github.com/t3l3machus/psudohash
+## python3 psudohash.py -w 'monday,tuesday,wednesday,thursday,friday,saturday,sunday,winter,summer,autumn,spring' --common-paddings-after --common-paddings-bef
+ore -y 1990,2023 -o /dev/shm/001_DaysAndSeasons.txt
+
 ## My custom hashcat rules file
 ## Author: https://github.com/F-Masood?tab=repositories
 ## Dated: 14 July 2021
