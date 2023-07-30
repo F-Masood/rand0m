@@ -1,11 +1,16 @@
 ### Active Directory
 
+### AD Strategy
+1. Start with nmap, to idenftiy the network.
+2. Assume Breach strategy
+3.    1. Get user, groups, computers
+
 #### How to identify alive hosts in netowrk ?
 1. Run nmap ping sweep, Command: `nmap -r -sn 192.168.110.0/24`
 2. Run nmap ping sweep, Command: `nmap -r -sP 192.168.110.0/24` 
 
 #### How to identify Domain Controller (DC) ?
-1. Most probably a DC would be having open PORTS e.g 53 and 88 which are not avbl to other Windows machines.
+1. Most probably a DC would be having open PORTS e.g 53 and **88 (KDC)**, 389, 636 which are not avbl to other Windows machines.
 2. If you're in DC network, Command: `nmap -r -v --open -sC -sV -p53,88,389,636 <DC IP>`
 3. If above command shows these ports **OPEN** ... You got **DC** !!!
 
@@ -48,3 +53,10 @@
 2. The above command would you give you shell. 
 
 ### After shell, use SYSINTERNALS AD Explorer  / Bloodhound
+
+### Useful commands - Assume Breach Appraoch - You're inside the DC network with valid user/pass combination
+1. **Local vs Domain** - This command tells all the users present in the current system. Command: `net user` or `net user <username>`
+3. **Local vs Domain** - This command tells all the users present in all the DC. Command: `net user /domain` or `net user <username>  /domain `
+
+
+  
