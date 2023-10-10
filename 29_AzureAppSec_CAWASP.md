@@ -110,3 +110,83 @@ cloud_graph_host_name                 : graph.windows.net
 msgraph_host                          : graph.microsoft.com
 rbac_url                              : https://pas.windows.net
 ```
+
+### Retrive Tenant ID ? [AAD Internals method]
+
+```
+Set-ExecutionPolicy -Scope "CurrentUser" -ExecutionPolicy "RemoteSigned"
+#Get-ExecutionPolicy
+Import-Module C:\Tools\AADInternals-master\AADInternals.psd1
+Get-AADIntTenantID -Domain quantumsecurity.co.nz
+```
+#### Following is the valid reponse
+
+```
+e51ee1a6-e3fa-4fb6-9424-0e022c6abe61
+```
+
+### Retrive All The Domains Present In the AZ Tenant ? [AAD Internals method]
+
+```
+Set-ExecutionPolicy -Scope "CurrentUser" -ExecutionPolicy "RemoteSigned"
+#Get-ExecutionPolicy
+Import-Module C:\Tools\AADInternals-master\AADInternals.psd1
+Get-AADIntTenantDomains -Domain quantumsecurity.co.nz
+```
+
+#### Following is the valid reponse
+
+```
+nzbeta4.co.nz
+qssl.nz
+quantumsecnz.onmicrosoft.com
+quantumsecurity.co.nz
+quantumsecurity.nz
+```
+
+### Check if the user is valid ? [Powershell method]
+
+'''
+$Username = "fowz@quantumsecurity.co.nz"
+$URI = 'https://login.microsoftonline.com/common/GetCredentialType'
+$RequestParams = @{
+    Method = 'POST'
+    Uri = $URI
+    Body = @{
+        'Username' = $Username
+        } | ConvertTo-Json
+        }
+    $Result = Invoke-RestMethod @RequestParams
+
+    if ($Result.IfExistsResult -eq 0)
+    {Write-Output "$UserName is valid"}
+
+    else
+    {Write-Output "$Username is invalid"}
+'''
+#### Following is the valid reponse
+
+```
+fowz@quantumsecurity.co.nz is valid
+```
+
+### Check if the Office365 is used ? [Powershell method]
+
+```
+$Username = "fowz@quantumsecurity.co.nz"
+$URI = "https://outlook.office365.com/autodiscover/autodiscover.json?Email=$UserName&Protocol=Autodiscoverv1"
+
+$RequestParams = @{
+Method = 'GET'
+Uri = $URI}
+
+Invoke-RestMethod @RequestParams
+```
+
+#### Following is the valid response
+
+```
+Protocol       Url                                                        
+--------       ---                                                        
+Autodiscoverv1 https://outlook.office365.com/autodiscover/autodiscover.xml
+```
