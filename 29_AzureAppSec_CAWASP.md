@@ -1,4 +1,4 @@
-### Check if domain (user full email id) exists on Azure ?
+### Check if domain (user full email id) is using Azure tenant ? [Powershell method]
 
 ```
 $User = "fowz@quantumsecurity.co.nz"
@@ -24,4 +24,10 @@ CloudInstanceIssuerUri : urn:federation:MicrosoftOnline
 State UserState Login                            NameSpaceType
 ----- --------- -----                            -------------
     4         1 fowz@quantumsecurity1111.co.nz Unknown      
+```
+
+### Check if domain (user full email id) is using Azure tenant ? [AAD Internals method]
+
+```
+Get-AADIntLoginInformation -Username [UserName]
 ```
