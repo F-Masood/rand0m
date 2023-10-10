@@ -23,5 +23,5 @@ CloudInstanceIssuerUri : urn:federation:MicrosoftOnline
 ```
 State UserState Login                            NameSpaceType
 ----- --------- -----                            -------------
-    4         1 fowz111@quantumsecu111rity.co.nz Unknown      
+    4         1 fowz@quantumsecurity1111.co.nz Unknown      
 ```
