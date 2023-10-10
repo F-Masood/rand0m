@@ -70,6 +70,7 @@ $Domain = "quantumsecurity.co.nz"
 $URL = "https://login.microsoftonline.com/$Domain/.well-known/openid-configuration"
 Invoke-RestMethod -Method Get -Uri $URL
 ```
+
 #### Following is the invalid reponse
 
 ```
@@ -164,6 +165,7 @@ $RequestParams = @{
     else
     {Write-Output "$Username is invalid"}
 '''
+
 #### Following is the valid reponse
 
 ```
