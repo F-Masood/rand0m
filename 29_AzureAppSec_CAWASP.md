@@ -64,12 +64,14 @@ User State                           : 1
 > Exists = 0 (user present) Exists = 1 (user not present)
 
 ### Retrive Tenant ID ? [Powershell method]
+
 ```
 $Domain = "quantumsecurity.co.nz"
 $URL = "https://login.microsoftonline.com/$Domain/.well-known/openid-configuration"
 Invoke-RestMethod -Method Get -Uri $URL
 ```
 #### Following is the invalid reponse
+
 ```
 token_endpoint                        : https://login.microsoftonline.com/e51ee1a6-e3fa-4
                                         fb6-9424-0e022c6abe61/oauth2/token
