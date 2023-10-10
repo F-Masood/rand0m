@@ -147,7 +147,7 @@ quantumsecurity.nz
 
 ### Check if the user is valid ? [Powershell method]
 
-'''
+```
 $Username = "fowz@quantumsecurity.co.nz"
 $URI = 'https://login.microsoftonline.com/common/GetCredentialType'
 $RequestParams = @{
@@ -164,7 +164,7 @@ $RequestParams = @{
 
     else
     {Write-Output "$Username is invalid"}
-'''
+```
 
 #### Following is the valid reponse
 
