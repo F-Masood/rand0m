@@ -1,3 +1,5 @@
+##Recon
+
 ### Check if domain (user full email id) is using Azure tenant ? [Powershell method]
 
 ```
@@ -192,3 +194,40 @@ Protocol       Url
 --------       ---                                                        
 Autodiscoverv1 https://outlook.office365.com/autodiscover/autodiscover.xml
 ```
+
+### List All Domains ? [Microburst method]
+
+```
+Import-Module C:\Tools\MicroBurst-master\Misc\Invoke-EnumerateAzureSubDomains.ps1 -Verbose
+Invoke-EnumerateAzureSubDomains -Base "qssl" -verbose
+```
+
+#### Following is the valid response
+
+```
+Subdomain                                   Service                
+---------                                   -------                
+quantumsecurity.mail.protection.outlook.com Email                  
+quantumsecurity.onmicrosoft.com             Microsoft Hosted Domain
+```
+##Enumeration 
+> Valid Creds are required to enumerate Azure services
+
+###Azure Resources
+> Resources
+> Resource Groups
+> App Services
+> Function Apps
+> Key Vaults
+> Storage Accounts
+> SQL Servers
+> SQL Databases
+> Cosmos DB Account
+> Assigned Permissions
+
+###Azure AD Objects
+> Azure AD Users
+> Azure AD Groups
+> App Registrations
+> Enterpirse Apps
+
