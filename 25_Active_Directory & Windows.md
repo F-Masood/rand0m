@@ -17,6 +17,9 @@
 ### How to extract the underlying Windows OS via crackmapexec?
 1. Command: `proxychains crackmapexec smb -d somedomain.htb -u user -p 'password' -dc-ip 192.168.110.52-55`
 
+### How to Generate username combinations ?
+1. Use https://github.com/urbanadventurer/username-anarchy
+
 ### How to know that username/password combination is valid - crakmapexec ?
 1. If running follwing crackmapexec command against **DC** gives you **+** symbol, the **creds** are valid.
 2. Command:  `proxychains crackmapexec smb -d somedomain.htb -u user -p 'password' -dc-ip 192.168.110.55`
