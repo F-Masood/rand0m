@@ -78,8 +78,8 @@
 
 
 ### From Windows
-#### PrivEsc in Windows
 
+#### PrivEsc in Windows
 1. Vulnerablities in installed software our outdated OS or missing patches.
 2. AutoLogON Passwords in Cleartext.
 3. AlwaysInstallElevated.
