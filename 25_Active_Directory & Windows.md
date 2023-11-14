@@ -90,11 +90,13 @@
 8. Tools: PowerUP + PrivESC + WinPEAS
 
 #### Enumeration after importing Powerview
-1. `Get-NetDomain`
-2. `Get-DomainComputer | select samaccountname,operatingsystem` #find OS details
-3. `Get-NetDomainController`
-4. `Get-NetUser`
-5. `Get-NetGroupMember -Identity "Enterprise Admins" -Domain  moneycorp.local` #Find enterprise admin, which is accessible on root only
+1. `Get-NetDomain` #Net domain details
+2. `Get-NetForset` #Net forest details
+3.  Run DomainPasswordSpray powershell script to list all the user accounts txt
+5. `Get-DomainComputer | select samaccountname,operatingsystem` #find OS details
+6. `Get-NetDomainController`
+7. `Get-NetUser`
+8. `Get-NetGroupMember -Identity "Enterprise Admins" -Domain  moneycorp.local` #Find enterprise admin, which is accessible on root only
    
 #### Enumeration after importing Powerup
 1. `Invoke-Allchecks`
