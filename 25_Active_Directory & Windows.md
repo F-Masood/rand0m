@@ -97,10 +97,16 @@
 6. `Get-NetDomainController`
 7. `Get-NetUser`
 8. `Get-NetGroupMember -Identity "Enterprise Admins" -Domain  moneycorp.local` #Find enterprise admin, which is accessible on root only
+9. `Get-DomainComputer -TrustedToAuth` #Looking for constrained delegation abuse (Look for attribute msDS-AllowedToDelegateTo)
+10. `Get-DomainUser -TrustedToAuth` #Looking for constrained delegation abuse (msDS-AllowedToDelegateTo)
+11. `Get-DomainUser -TrustedToAuth | select userprincipalname, name, msds-allowedtodelegateto` #Looking for constrained delegation abuse
+12. `Get-DomainComputer -TrustedToAuth | select userprincipalname, name, msds-allowedtodelegateto` #Looking for constrained delegation abuse
    
-#### Enumeration after importing Powerup
+#### PrivESC after importing Powerup
 1. `Invoke-Allchecks`
 
 
 #### AD Pentesting Tools
 1. Obviously neo4j and bloodhound or powerhound
+2. plumhound
+3. adminer
