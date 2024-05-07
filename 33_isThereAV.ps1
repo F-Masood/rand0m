@@ -1,4 +1,3 @@
-### powershell conversion of https://github.com/nand0san/av_detect/tree/main (av_detect.exe)
 $SecuritySoftwareProcesses = 
 @{
      <# Just for test purposes
@@ -558,7 +557,15 @@ Function IsSecuritySoftwareRunning {
     $DetectedProcesses = @{}
     $Found = $false
 
-    $Processes = Get-Process | Select-Object -ExpandProperty Name
+    #do in powershell
+    #Write-Host "`n*** Loading process names from powershell"
+    #$Processes = Get-Process | Select-Object -ExpandProperty Name
+
+    #do read process from a text file, the file will have output of -> Get-Process | Select-Object -ExpandProperty Name
+    $readFilePath = "C:\Users\poor.victim\Downloads\ProcessExplorer\021_GetProcessPowerShellExpandPropertyName.txt";
+    Write-Host "`n*** Loading process names from provided text file" + $readFilePath;
+    $Processes = Get-Content -Path $readFilePath;
+
 
     foreach ($Process in $Processes) {
         $LowerCaseProcessName = $Process.ToLower()
